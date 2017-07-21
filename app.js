@@ -4,6 +4,8 @@ const url = "mongodb://localhost:27017/restaurant_db";
 
 mongo.connect(url, function(err, db){
   const collection = db.collection('restaurants');
+
+  	//SHOW ALL RESTAURANTS
    	var allChoice = prompt("Type 'all' and press enter to display all restaurants' names: ");
   	if(allChoice == "all"){
     	collection.find().toArray(function(err, doc){
@@ -23,8 +25,14 @@ mongo.connect(url, function(err, db){
   	//USER ADDS NEW RESTAURANT	
  	const userNew = prompt("Add Your Own Restaurant!: ");
  	const yelpChoice = prompt("What is the yelp page?: ");
+ 	const street = prompt("what is the street address?");
+ 	const zip = prompt("what is the Zip code?");
  	collection.insert({
   		"name": userNew,
+  		"address": {
+  			"street": street,
+  			"zipcode": zip
+		},
   		"yelp": yelpChoice
   	});
 	collection.find().toArray(function(err,doc) {
@@ -73,4 +81,4 @@ mongo.connect(url, function(err, db){
 	collection.find().toArray(function(err,doc) {
 		console.log(doc);
 	});
-});
+ });
