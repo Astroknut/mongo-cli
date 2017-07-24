@@ -4,12 +4,13 @@ const url = "mongodb://localhost:27017/restaurant_db";
 
 mongo.connect(url, function(err, db){
   	const collection = db.collection('restaurants');
-  	console.log("Check out Mongo for our collection of restaurants!")
+  	console.log("Check out Mongo for our collection of restaurants!");
   	const userAction = prompt("Would you like to view, view all, add, update, or delete?: ");
 
   	//SHOW ALL RESTAURANTS
   	if(userAction == "view all"){
    		collection.find().toArray(function(err, doc){
+   			if (err) console.log(err);
      		console.log(doc);
    		});
 
@@ -17,6 +18,7 @@ mongo.connect(url, function(err, db){
   	} else if(userAction == "view"){
   		const userChoice = prompt("Type the name of the restaurant you would like to see: ");
   		collection.find({"name": userChoice}).toArray(function(err,doc) {
+  			if (err) console.log(err);
   			console.log(doc);
   			});
 
@@ -35,6 +37,7 @@ mongo.connect(url, function(err, db){
   			"yelp": yelpChoice
   		});
 		collection.find().toArray(function(err,doc) {
+			if (err) console.log(err);
   			console.log(doc);
   		});
 
@@ -50,6 +53,7 @@ mongo.connect(url, function(err, db){
 				{ $set: {name: newName}}
 				);
 			collection.find().toArray(function(err,doc) {
+				if (err) console.log(err);
 				console.log(doc);
 		 	});
 		} else if (updateType == "address"){
@@ -73,6 +77,7 @@ mongo.connect(url, function(err, db){
 				{ $set: {yelp: newYelp}}
 				);
 			collection.find().toArray(function(err,doc) {
+				if (err) console.log(err);
 				console.log(doc);
 				});
 			}
@@ -82,6 +87,7 @@ mongo.connect(url, function(err, db){
 		var deleteChoice = prompt("Which restaurant would you like to delete? Name: ");
 		collection.remove({name: deleteChoice});
 		collection.find().toArray(function(err,doc) {
+			if (err) console.log(err);
 			console.log(doc);
 		});
 	}
