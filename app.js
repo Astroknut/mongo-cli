@@ -3,15 +3,15 @@ const prompt = require("prompt-sync")();
 const url = "mongodb://localhost:27017/restaurant_db";
 
 mongo.connect(url, function(err, db){
-  const collection = db.collection('restaurants');
-  console.log("Check out Mongo for our collection of restaurants!")
-  const userAction = prompt("Would you like to view, view all, add, update, or delete?: ");
+  	const collection = db.collection('restaurants');
+  	console.log("Check out Mongo for our collection of restaurants!")
+  	const userAction = prompt("Would you like to view, view all, add, update, or delete?: ");
 
   	//SHOW ALL RESTAURANTS
   	if(userAction == "view all"){
-    	collection.find().toArray(function(err, doc){
-      	console.log(doc);
-    	});
+   		collection.find().toArray(function(err, doc){
+     		console.log(doc);
+   		});
 
   	//USER FIND SPECIFIC RESTAURANT
   	} else if(userAction == "view"){
@@ -35,8 +35,8 @@ mongo.connect(url, function(err, db){
   			"yelp": yelpChoice
   		});
 		collection.find().toArray(function(err,doc) {
-  		console.log(doc);
-  	});
+  			console.log(doc);
+  		});
 
 	//USER UPDATES RESTAURANT
 	} else if (userAction == "update") {
